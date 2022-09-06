@@ -1,0 +1,2 @@
+print(f"“Life is what happens\n      when\n         you’re busy making other plans”\n                                     John Lennon.")
+#print(f"“Life is what happens\vwhen\vyou’re busy making other plans”\vJohn Lennon.") \v,\f не работают
