@@ -1,23 +1,34 @@
 # Упражнение 122. «Поросячья латынь»
 
 word = input('Введите слово: ')
+# КОММЕНТАРИЙ: можно и в одну строку записать — результат проверки с помощью оператора in будет идентичным
 vocalic = ['a', 'e', 'i', 'o', 'u']
 if word[0] in vocalic:
-    print (word + 'way')
+    print(word + 'way')
     
 elif word[1] in vocalic:
     pig_latin = word[1:] + word[0] + "ay"
     print(pig_latin)
     
-elif word[2] in vocalic:           
+elif word[2] in vocalic:
     pig_latin = word[2:] + word[0] + word[1] + "ay"
     print(pig_latin)
     
-elif word[3] in vocalic:           
+elif word[3] in vocalic:
+    # ИСПРАВИТЬ: даже если ранее не было острой необходимости, то уж сюда-то точно просится срез вместо трёх символов подряд
     pig_latin = word[3:] + word[0] + word[1] + word[2] + "ay"
-    print(pig_latin)    
-    
+    print(pig_latin)
+
+
+# КОММЕНТАРИЙ: поскольку слов, начинающихся с четырёх согласных (не считая аббревиатур), в английском языке нет — ваш код действительно полностью решает задачу
+#  но всё-таки объединить эти проверки в цикл было бы удобнее
+#  а ещё было бы всё же неплохо попрактиковаться в строковых методах
+
+
 # office -> officeway
 # computer -> omputercay
 # think -> inkthay
 # string -> ingstray
+
+
+# ИТОГ: не увидел строковых методов, переписать с их использованием — 2/5
