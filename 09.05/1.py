@@ -11,10 +11,10 @@ print(f'{s2 = }\n')
 print(s1.difference(s2))
 print(s2.difference(s1))
 
+
+# stdout:
 # s1 = {11, 13, 15, 17, 19, 21, 23}
 # s2 = {1, 6, 11, 16, 21}
 
 # {13, 15, 17, 19, 23}
 # {16, 1, 6}
-
-
