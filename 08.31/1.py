@@ -5,14 +5,11 @@
 # Протестируйте с различными lambda-функциями и наборами аргументов
 
 
-
-
-
-# Eсли у коэффициентов a, b, c в анностации указать тип str (в данном варианте кода), 
-# функция возвращает None, поэтому заменила тип str на int
 from random import randrange as rr
 import random
 
+
+# Если у коэффициентов a, b, c в аннотации указать тип str (в данном варианте кода), функция возвращает None, поэтому заменила тип str на int
 def math_func(a, b, c: int | float) -> bool:
     """Возвращает True или False в зависимости от типа входных параметров функции f(x) = a*x**2 + b*x + c."""
     lambda x: a*x**2 + b*x + c
@@ -20,14 +17,20 @@ def math_func(a, b, c: int | float) -> bool:
         return True
     if type(x) is float:
         return False
-        
+
+
 a, b, c = [rr(1, 10) for _ in range(3)]
 print(f'{a, b, c = }')
-x = random.choice([rr(1, 20), round(random.uniform(1.1, 19.9), 2)])
+x = random.choice([
+    rr(1, 20),
+    round(random.uniform(1.1, 19.9), 2)
+])
 print(f'{x = }')
 f = math_func(a, b, c)
 print(f)
 
+
+# stdout:
 # a, b, c = (2, 9, 8)
 # x = 14
 # True
