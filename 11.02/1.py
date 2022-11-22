@@ -15,3 +15,6 @@ area_1 = th1.area()
 volume_1 = th1.volume()
 print(f'{area_1 = }')
 print(f'{volume_1 = }')
+
+
+# ИТОГ: очень хорошо — 5/5
