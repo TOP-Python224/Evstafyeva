@@ -10,7 +10,6 @@ class Day_time:
         :param day: период с 12:00 до 17:59
         :param evening: период с 18:00 до 23:59
         """
-
         self.time_period = time_period
         for time_period in range(0, dt.time[0:3](5, 59, 59)):
             self.time_period = night
@@ -23,8 +22,6 @@ class Day_time:
 
         for time_period in range(dt.time[0:3](18, 00, 00), dt.time[0:3](23, 59, 59)):
             self.time_period = evening
-
-
 
     def current_period(self, current_time) -> str:
         """Определяет период суток. Принимает параметр, задающий смещение от текущего часового пояса.
@@ -45,6 +42,3 @@ class Day_time:
 # time_now =
 # my_time_period = Day_time(time_now)
 # print(my_time_period)
-
-
-

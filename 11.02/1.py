@@ -1,5 +1,3 @@
-
-
 class Tetrahedron:
     """Описывает правильный тетраэдр ."""
     def __init__(self, edge: int | float):
