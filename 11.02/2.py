@@ -1,49 +1,39 @@
 from datetime import datetime as dt
 
-
 class Day_time:
     """Определяет текущий период суток — утро, день, вечер, ночь — для времени в том или ином часовом поясе."""
-    def __init__(self, time_period: tuple) -> None:
-        """
-        :param night: период с 0:00 до 5:59
-        :param morning: период с 6:00 до 11:59
-        :param day: период с 12:00 до 17:59
-        :param evening: период с 18:00 до 23:59
-        """
-        self.time_period = time_period
-        for time_period in range(0, dt.time[0:3](5, 59, 59)):
-            self.time_period = night
 
-        for time_period in range(dt.time[0:3](6, 00, 00), dt.time[0:3](11, 59, 59)):
-            self.time_period = morning
+    def __init__(self, user_time) -> None:
+        self.user_time = user_time
+        self.start_point = None
 
-        for time_period in range(dt.time[0:3](12, 00, 00), dt.time[0:3](17, 59, 59)):
-            self.time_period = day
+    def base_time_zone(self, start_point):
+        """Принимает параметр, задающий смещение от текущего часового пояса.
+        Текущий часовой пояс — это часовой пояс компьютера, на котором запущен скрипт бота. Определяет период суток
+        пользователя. """
 
-        for time_period in range(dt.time[0:3](18, 00, 00), dt.time[0:3](23, 59, 59)):
-            self.time_period = evening
-
-    def current_period(self, current_time) -> str:
-        """Определяет период суток. Принимает параметр, задающий смещение от текущего часового пояса.
-        Текущий часовой пояс — это часовой пояс компьютера, на котором запущен скрипт бота."""
-        current_time = dt.now[3:6]
-        if current_time == night:
+        self.start_point = start_point
+        start_point = dt.now().hour
+        if self.start_point and self.user_time in range(0, 6):
             print('Good night!')
-        if current_time == morning:
+        if self.start_point and self.user_time in range(6, 12):
             print('Good morning!')
-        if current_time == day:
+        if self.start_point and self.user_time in range(12, 18):
             print('Good day!')
-        if current_time == evening:
+        if self.start_point and self.user_time in range(18, 24):
             print('Good evening!')
+        return start_point
 
-    def __str__(self):
-        return f'{current_time}'
+    def delta_time(self) -> int:
+        return abs(self.user_time - self.start_point)
 
+# тест
+user = Day_time(3)
+bot = user.base_time_zone(dt.now().hour)
+delta_user_bot = user.delta_time()
+print(f'Разница во времени человека и бота: {delta_user_bot} ч')
 
-# time_now =
-# my_time_period = Day_time(time_now)
-# print(my_time_period)
-
+# Извините, случайно обновила старую версию в репозиторие.
 
 # КОММЕНТАРИЙ: ждал-ждал правки, так и не дождался =(
 # СДЕЛАТЬ: работу над ошибками в этой задаче, комментарии по ней давал в индивидуальном занятии, пересмотрите запись занятия
