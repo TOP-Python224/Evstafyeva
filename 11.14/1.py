@@ -10,13 +10,20 @@ class Person:
         self.surname = surname
         self.patronymic = patronymic
 
-    @staticmethod
-    def is_educating():
-        if Person is Student:
-            return True
-        else:
-            return False
+    # @staticmethod
+    def is_educating(self):
+        # КОММЕНТАРИЙ: ваше условие можно озвучить следующим образом: "является ли объект класса Person объектом класса Student?" — очевидно, что вы всегда будете получать отрицательный ответ
+        # ИСПОЛЬЗОВАТЬ: вам же нужно проверить класс у объекта экземпляра — для этого нужен не статический, а обычный метод
+        # if Person is Student:
+        #     return True
+        # else:
+        #     return False
+        # ИСПОЛЬЗОВАТЬ: однозначную проверку только одного класса
+        # return self.__class__ is Student
+        # или ИСПОЛЬЗОВАТЬ: проверку на принадлежность к указанному классу или любого его подкласса — предпочтительный вариант
+        return isinstance(self, Student)
 
+    # ИСПРАВИТЬ: по аналогии с предыдущим методом
     @staticmethod
     def is_employed():
         if Person is Employee:
@@ -40,7 +47,9 @@ class Student(Person):
         self.commercial = commercial
 
     def __str__(self):
-        return f'<{self.name} {self.surname} {self.patronymic} учится в {self.educational_organization}>'
+        # ИСПОЛЬЗОВАТЬ: функцию super() можно использовать с любым методом родительского класса, включая и __str__() тоже:
+        fullname = super().__str__()[1:-1]
+        return f'<{fullname} учится в {self.educational_organization}>'
 
 
 class Employee(Person):
@@ -55,6 +64,7 @@ class Employee(Person):
         self.salary = salary
 
     def __str__(self):
+        # ИСПРАВИТЬ: по аналогии с предыдущим классом
         return f'<{self.name} {self.surname} {self.patronymic} работает в {self.company} с окладом в {self.salary} рублей>'
 
 
@@ -67,6 +77,7 @@ print(student1)
 person1 = student1.is_educating()
 print(person1)
 print()
+
 employee1 = Employee('Петров', 'Петр', 'Петрович', 'Сбербанк', 100000)
 print(employee1)
 
@@ -78,3 +89,6 @@ print(person2)
 # pprint(Student.__dict__)
 # область видимости объекта класса
 # pprint(dir(Student))
+
+
+# ИТОГ: конструкторы реализованы верно, остальное не очень, необходимо провести работу над ошибками — 4/7
