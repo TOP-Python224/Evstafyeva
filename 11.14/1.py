@@ -1,13 +1,14 @@
 from pprint import pprint
 
+
 class Person:
     def __init__(self,
                  surname: str,
                  name: str,
-                 patronycname: str):
+                 patronymic: str):
         self.name = name
         self.surname = surname
-        self.patronycname = patronycname
+        self.patronymic = patronymic
 
     @staticmethod
     def is_educating():
@@ -24,49 +25,53 @@ class Person:
             return False
 
     def __str__(self):
-        return f'<{self.name} {self.surname} {self.patronycname}>'
+        return f'<{self.name} {self.surname} {self.patronymic}>'
 
 
 class Student(Person):
     def __init__(self,
                  surname: str,
                  name: str,
-                 patronycname: str,
+                 patronymic: str,
                  educational_organization: str,
                  commercial: bool = False):
-        super().__init__(surname, name, patronycname)
+        super().__init__(surname, name, patronymic)
         self.educational_organization = educational_organization
         self.commercial = commercial
 
     def __str__(self):
-        return f'<{self.name} {self.surname} {self.patronycname} учится в {self.educational_organization}>'
+        return f'<{self.name} {self.surname} {self.patronymic} учится в {self.educational_organization}>'
 
 
 class Employee(Person):
     def __init__(self,
                  surname: str,
                  name: str,
-                 patronycname: str,
+                 patronymic: str,
                  company: str,
                  salary: int):
-        super().__init__(surname, name, patronycname)
+        super().__init__(surname, name, patronymic)
         self.company = company
         self.salary = salary
 
     def __str__(self):
-        return f'<{self.name} {self.surname} {self.patronycname} работает в {self.company} с окладом в {self.salary} рублей>'
+        return f'<{self.name} {self.surname} {self.patronymic} работает в {self.company} с окладом в {self.salary} рублей>'
 
 
 # тест
 student1 = Student('Иванов', 'Иван', 'Иванович', 'МГУ', True)
 print(student1)
 # print(student1.__dict__)
-person1 = student1.is_educating() # проверка на принадлежность студента к обучающимся не работает
+
+# проверка на принадлежность студента к обучающимся не работает
+person1 = student1.is_educating()
 print(person1)
 print()
 employee1 = Employee('Петров', 'Петр', 'Петрович', 'Сбербанк', 100000)
 print(employee1)
-person2 = employee1.is_employed() # проверка на принадлежность сотрудника к работающим не работает
+
+# проверка на принадлежность сотрудника к работающим не работает
+person2 = employee1.is_employed()
 print(person2)
 
 # собственное пространство имён объекта класса

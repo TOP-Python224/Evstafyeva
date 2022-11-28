@@ -1,6 +1,5 @@
 class Point:
     """Описывает точку на плоскости в декартовой системе координат."""
-
     def __init__(self, x: float, y: float):
         self.x = x
         self.y = y
@@ -8,19 +7,17 @@ class Point:
 
 class Line:
     """Описывает отрезок, задаваемый двумя точками на плоскости в декартовой системе координат."""
-
     def __init__(self, start_point: Point, end_point: Point):
         self.start_point = start_point
         self.end_point = end_point
 
     @property
     def length(self) -> float:
-        return ((self.end_point.x - self.start_point.x) ** 2 + (self.end_point.y - self.start_point.y) ** 2) ** 0.5
+        return ((self.end_point.x - self.start_point.x)**2 + (self.end_point.y - self.start_point.y)**2)**0.5
 
 
 class Polygon:
     """Описывает многоугольник, задаваемый отрезками на плоскости в декартовой системе координат."""
-
     def __init__(self,
                  side1: Line,
                  side2: Line,
