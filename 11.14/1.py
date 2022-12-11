@@ -1,5 +1,3 @@
-from pprint import pprint
-
 
 class Person:
     def __init__(self,
@@ -24,12 +22,10 @@ class Person:
         return isinstance(self, Student)
 
     # ИСПРАВИТЬ: по аналогии с предыдущим методом
-    @staticmethod
-    def is_employed():
-        if Person is Employee:
-            return True
-        else:
-            return False
+
+    def is_employed(self):
+        return isinstance(self, Employee)
+
 
     def __str__(self):
         return f'<{self.name} {self.surname} {self.patronymic}>'
@@ -65,30 +61,27 @@ class Employee(Person):
 
     def __str__(self):
         # ИСПРАВИТЬ: по аналогии с предыдущим классом
-        return f'<{self.name} {self.surname} {self.patronymic} работает в {self.company} с окладом в {self.salary} рублей>'
+        fullname = super().__str__()[1:-1]
+        return f'<{fullname} работает в {self.company} с окладом в {self.salary} рублей>'
 
 
 # тест
 student1 = Student('Иванов', 'Иван', 'Иванович', 'МГУ', True)
 print(student1)
-# print(student1.__dict__)
 
-# проверка на принадлежность студента к обучающимся не работает
+# проверка на принадлежность студента к обучающимся
 person1 = student1.is_educating()
+# person1 = student1.is_employed()
 print(person1)
 print()
 
 employee1 = Employee('Петров', 'Петр', 'Петрович', 'Сбербанк', 100000)
 print(employee1)
 
-# проверка на принадлежность сотрудника к работающим не работает
+# проверка на принадлежность сотрудника к работающим
+# person2 = employee1.is_educating()
 person2 = employee1.is_employed()
 print(person2)
-
-# собственное пространство имён объекта класса
-# pprint(Student.__dict__)
-# область видимости объекта класса
-# pprint(dir(Student))
 
 
 # ИТОГ: конструкторы реализованы верно, остальное не очень, необходимо провести работу над ошибками — 4/7
