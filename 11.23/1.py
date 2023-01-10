@@ -1,7 +1,6 @@
 from abc import ABC
-from dataclasses import dataclass
-from decimal import Decimal
 from datetime import date
+from decimal import Decimal
 from enum import Enum
 
 
@@ -83,30 +82,37 @@ class Employee(ABC, Person):
         self.salary = salary
         self.position = position
         self.head = head
-
         super().__init__(surname, name, patronymic, birthdate, gender, contact)
 
     @property
     def experience(self):
         return None
 
+
+class GeneralPersonnel(Employee):
+    pass
+
+
 class Administrator(Employee):
 
     def __init__(self,
                  division: str,
                  subordinates: list[Employee]):
-
         self.subordinates = subordinates
         self.division = division
-
-        super().__init__(hire_date,
-                         _prev_experience,
-                         salary, position,
-                         head, surname,
-                         name, patronymic,
-                         birthdate,
-                         gender, contact)
-
+        super().__init__(
+            hire_date,
+            _prev_experience,
+            salary,
+            position,
+            head,
+            surname,
+            name,
+            patronymic,
+            birthdate,
+            gender,
+            contact
+        )
 
 
 class ProfessionalEmployee(Employee):
@@ -114,14 +120,68 @@ class ProfessionalEmployee(Employee):
 
     def __init__(self, degree: Degree):
         self.degree = degree
+        super().__init__(
+            hire_date,
+            _prev_experience,
+            salary,
+            position,
+            head,
+            surname,
+            name,
+            patronymic,
+            birthdate,
+            gender,
+            contact
+        )
 
-        super().__init__(hire_date,
-                         _prev_experience,
-                         salary, position,
-                         head, surname,
-                         name, patronymic,
-                         birthdate,
-                         gender, contact)
+
+class Researcher(ProfessionalEmployee):
+    pass
+
+
+class Teacher(ProfessionalEmployee):
+    """Содержит информацию о преподавателях и курсах, которые они ведут"""
+
+    class Degree(Enum):
+        BACHELOR = 'bachelor'
+        SPECIALIST = 'specialist'
+        MASTER = 'master'
+        CANDIDATE = 'candidate'
+        DOCTOR = 'doctor'
+
+    def __init__(self,
+                 courses: list[str],
+                 professorship: bool,
+                 ):
+        self.courses = courses
+        self.professorship = professorship
+
+
+class Student(Person):
+    """Содержит информацию о студентах"""
+
+    class EducationForm(Enum):
+        INTRAMURAL = 'intramural'
+        EXTRAMURAL = 'extramural'
+        REMOTE = 'remote'
+
+    class Contract(Enum):
+        BUDGET = 'budget'
+        COMPANY = 'company'
+        PERSONAL = 'personal'
+
+    def __init__(self,
+                 form: EducationForm,
+                 contract: Contract,
+                 year: int,
+                 speciality: str,
+                 grant: Decimal):
+        self.grant = grant
+        self.speciality = speciality
+        self.year = year
+        self.contract = contract
+        self.form = form
+        super().__init__(surname, name, patronymic, birthdate, gender, contact)
 
 
 class OrganizationLevel(ABC):
@@ -162,7 +222,6 @@ class University(OrganizationLevel):
                  dormitories: list[Dormitory]):
         self.institutes = institutes
         self.dormitories = dormitories
-
         super().__init__(__budgets, name, __employees, _head, contact, __budget)
 
 
@@ -172,7 +231,6 @@ class Dormitory(OrganizationLevel):
     def __init__(self,
                  __rooms: dict[str, list[Student]]):
         self.__rooms = __rooms
-
         super().__init__(__budgets, name, __employees, _head, contact, __budget)
 
     def checkin_student(self,
@@ -186,7 +244,6 @@ class Institute(OrganizationLevel):
 
     def __init__(self, departments: list[Department]):
         self.departments = departments
-
         super().__init__(__budgets, name, __employees, _head, contact, __budget)
 
     def change_head(self):
@@ -199,7 +256,6 @@ class Department(OrganizationLevel):
     def __init__(self,
                  groups: list[Group]):
         self.groups = groups
-
         super().__init__(__budgets, name, __employees, _head, contact, __budget)
 
     def change_head(self):
@@ -213,7 +269,7 @@ class Department(OrganizationLevel):
 
 
 class Group(list):
-    """Содержит информацию о группах, ствростах, кураторах"""
+    """Содержит информацию о группах, старостах, кураторах"""
 
     def __init__(self,
                  name: str,
@@ -229,60 +285,4 @@ class Group(list):
 
     def change_curator(self):
         pass
-
-
-class Student(Person):
-    """Содержит информацию о cтудентах"""
-
-    class EducationForm(Enum):
-        INTRAMURAL = 'intramural'
-        EXTRAMURAL = 'extramural'
-        REMOTE = 'remote'
-
-    class Contract(Enum):
-        BUDGET = 'budget'
-        COMPANY = 'company'
-        PERSONAL = 'personal'
-
-    def __init__(self,
-                 form: EducationForm,
-                 contract: Contract,
-                 year: int,
-                 speciality: str,
-                 grant: Decimal):
-        self.grant = grant
-        self.speciality = speciality
-        self.year = year
-        self.contract = contract
-        self.form = form
-
-        super().__init__(surname, name, patronymic, birthdate, gender, contact)
-
-
-class Teacher(ProfessionalEmployee):
-    """Содержит информацию о преподавателях и курсах, которые они ведут"""
-
-    class Degree(Enum):
-        BACHELOR = 'bachelor'
-        SPECIALIST = 'specialist'
-        MASTER = 'master'
-        CANDIDATE = 'candidate'
-        DOCTOR = 'doctor'
-
-    def __init__(self,
-                 courses: list[str],
-                 professorship: bool,
-                 ):
-        self.courses = courses
-        self.professorship = professorship
-
-
-class Researcher(ProfessionalEmployee):
-    pass
-
-
-class GeneralPersonnel(Employee):
-    pass
-
-
 
